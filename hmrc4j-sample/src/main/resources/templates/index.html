@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>HMRC4J Sample Application</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/hmrc4j/sample">HMRC4J Sample Application</a>
+                    </div>
+                </div>
+            </nav>
+
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <td>/hello/world</td>
+                        <td>Say Hello World</td>
+                        <td>
+                            <a class="btn btn-primary" href="/hmrc4j/sample/hello/world">Try it</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/hello/application</td>
+                        <td>Say Hello Application</td>
+                        <td>
+                            <a class="btn btn-primary" href="/hmrc4j/sample/hello/application">Try it</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/hello/user</td>
+                        <td>Say Hello User</td>
+                        <td>
+                            <a th:if="${!connected}" class="btn btn-success" th:href="${connectUrl}">Connect to HMRC</a>
+                            <a th:if="${connected}" class="btn btn-primary" href="/hmrc4j/sample/hello/user">Try it</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br/>
+            <br/>
+
+            <a th:if="${connected}" class="btn btn-danger" href="/hmrc4j/sample/revoke">Disconnect from HMRC</a>
+
+            <br/>
+            <br/>
+
+            <samp th:if="${message != null}" th:text="${message}" />
+
+        </div>
+
+    </body>
+</html>
