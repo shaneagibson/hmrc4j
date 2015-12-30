@@ -1,4 +1,4 @@
-# HMRC4J (Beta) - A Java Library for the HMRC API
+# HMRC4J - A Java Library for the HMRC API
 
 > DISCLAIMER : This Library is still a work-in-progress, and is still subject to further testing. It is not yet production-ready.
 
