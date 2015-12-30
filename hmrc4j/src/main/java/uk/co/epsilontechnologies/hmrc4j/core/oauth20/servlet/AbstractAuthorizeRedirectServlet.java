@@ -26,15 +26,15 @@ public abstract class AbstractAuthorizeRedirectServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         try {
             handleAuthorization(request);
-            response.sendRedirect(request.getContextPath() + onSuccess());
+            response.sendRedirect(request.getContextPath() + successRedirect());
         } catch (final Exception e) {
-            response.sendRedirect(request.getContextPath() + onError(e));
+            response.sendRedirect(request.getContextPath() + failureRedirect(e));
         }
     }
 
-    protected abstract String onSuccess();
+    protected abstract String successRedirect();
 
-    protected abstract String onError(final Exception exception);
+    protected abstract String failureRedirect(final Exception exception);
 
     protected abstract TokenStore getTokenStore(final HttpServletRequest request);
 

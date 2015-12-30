@@ -2,6 +2,8 @@
 
 > DISCLAIMER : This Library is still a work-in-progress, and is still subject to further testing. It is not yet production-ready.
 
+This library is provides a java-wrapper for HMRC's growing collection of APIs. For more information on what APIs are available, how to register as a developer and start using this library, take a look at the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation). 
+
 ### Accessing an Unrestricted Endpoint
 
 An unrestricted endpoint is accessible without a `server_token` or OAuth 2.0 `access_token`.
@@ -54,4 +56,4 @@ For an example of how to use HMRC4J, take a look at the `hmrc4j-sample` module. 
 
     > mvn clean install spring-boot:run
     
-Once the application has started, open `http://localhost:8080/hmrc4j/sample`.
+Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample)`.

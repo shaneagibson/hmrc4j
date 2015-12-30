@@ -78,4 +78,5 @@ public class SampleController {
     private boolean hasToken() {
         return tokenStore.getToken().isPresent();
     }
+
 }
