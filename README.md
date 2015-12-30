@@ -34,17 +34,15 @@ A user-restricted endpoint requires an OAuth 2.0 `access_token`. To get one, you
 
 You user will be first prompted to log in to HMRC using their Government Gateway credentials, and then asked to authorize your application for the requested permissions.
 
-Once the user has granted your application permission, HMRC will issue a 302 redirect to the provided `redirect_uri`. This redirect will contain an `authorization_code` query parameter.
+Once the user has granted your application permission, HMRC will issue a 302 redirect to the provided `redirect_uri`. This redirect will contain a `code` query parameter.
 
-By configuring your application to use 'AuthorizeRedirectServlet' for servicing the redirect, hmrc4j will exchange the authorization code for an OAuth 2.0 token. This token can be persisted for each user according to your TokenRegistry implementation.
+If your application subclasses 'AbstractAuthorizeRedirectServlet' for servicing the redirect, hmrc4j will exchange the authorization code for an OAuth 2.0 token. This token can be persisted for each user according to your TokenStore implementation.
 
-When your application wishes to use that token, it can be accessed from your token registry.
-
-    final TokenContext tokenContext = tokenRegistry.get(userId);
+Your application should provide an instance of your Token Store, where HMRC4J can access and update your User's access token as required.
 
     final HmrcCredentials hmrcCredentials = new HmrcCredentials(CLIENT_ID, CLIENT_SECRET, SERVER_TOKEN);
 
-    final Hmrc hmrc = HmrcFactory.createForUserRestrictedAccess(hmrcCredentials, tokenContext);
+    final Hmrc hmrc = HmrcFactory.createForUserRestrictedAccess(hmrcCredentials, tokenStore);
 
     final String message = hmrc.getAPI(HelloWorld.class).sayHelloUser();
 
