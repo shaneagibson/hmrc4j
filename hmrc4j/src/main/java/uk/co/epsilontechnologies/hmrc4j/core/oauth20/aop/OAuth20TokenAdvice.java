@@ -1,5 +1,7 @@
 package uk.co.epsilontechnologies.hmrc4j.core.oauth20.aop;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -14,11 +16,15 @@ import uk.co.epsilontechnologies.hmrc4j.core.oauth20.TokenManager;
 @Aspect
 public class OAuth20TokenAdvice {
 
+    private static final Log LOG = LogFactory.getLog(OAuth20TokenAdvice.class);
+
     @Pointcut("execution(public !static * uk.co.epsilontechnologies.hmrc4j.core.API+.*(..))")
     public void publicApiMethodInvocation() { }
 
     @Before("publicApiMethodInvocation() && @annotation(userRestricted)")
-    public void checkAuthToken(final JoinPoint joinPoint, final UserRestricted userRestricted) throws Throwable {
+    public void checkOAuthToken(final JoinPoint joinPoint, final UserRestricted userRestricted) throws Throwable {
+
+        LOG.debug("checking OAuth 2.0 Token");
 
         final TokenManager tokenManager = getTokenManager((API) joinPoint.getThis());
 
@@ -29,6 +35,7 @@ public class OAuth20TokenAdvice {
         }
 
         if (token.isExpired()) {
+            LOG.debug("refreshing OAuth 2.0 Token");
             tokenManager.refreshToken();
         }
 

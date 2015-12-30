@@ -16,12 +16,12 @@ public class SampleAuthorizeRedirectServlet extends AbstractAuthorizeRedirectSer
     }
 
     @Override
-    protected String onSuccess() {
+    protected String successRedirect() {
         return "/hmrc4j/sample/connected";
     }
 
     @Override
-    protected String onError(final Exception exception) {
+    protected String failureRedirect(final Exception exception) {
         return String.format("/hmrc4j/sample/error?error=%s", exception.getMessage());
     }
 
