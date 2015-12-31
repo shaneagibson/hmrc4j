@@ -26,9 +26,9 @@ public abstract class AbstractAuthorizeRedirectServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         try {
             handleAuthorization(request);
-            response.sendRedirect(request.getContextPath() + successRedirect());
+            response.sendRedirect(successRedirect());
         } catch (final Exception e) {
-            response.sendRedirect(request.getContextPath() + failureRedirect(e));
+            response.sendRedirect(failureRedirect(e));
         }
     }
 

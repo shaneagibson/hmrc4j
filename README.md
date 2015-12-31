@@ -10,7 +10,7 @@ An unrestricted endpoint is accessible without a `server_token` or OAuth 2.0 `ac
 
     final Hmrc hmrc = HmrcFactory.createForUnrestrictedAccess();
 
-    final String message = hmrc.getAPI(HelloWorld.class).sayHelloWorld();
+    final String message = hmrc.getAPI(HelloWorldAPI.class).sayHelloWorld();
 
     Assert.assertEquals("Hello World", message);
 
@@ -23,7 +23,7 @@ An application-restricted endpoint uses your application's `server_token`, which
 
     final Hmrc hmrc = HmrcFactory.createForApplicationRestrictedAccess(hmrcCredentials);
 
-    final String message = hmrc.getAPI(HelloWorld.class).sayHelloApplication();
+    final String message = hmrc.getAPI(HelloWorldAPI.class).sayHelloApplication();
 
     Assert.assertEquals("Hello Application", message);
 
@@ -46,7 +46,7 @@ Your application should provide an instance of your Token Store, where HMRC4J ca
 
     final Hmrc hmrc = HmrcFactory.createForUserRestrictedAccess(hmrcCredentials, tokenStore);
 
-    final String message = hmrc.getAPI(HelloWorld.class).sayHelloUser();
+    final String message = hmrc.getAPI(HelloWorldAPI.class).sayHelloUser();
 
     Assert.assertEquals("Hello User", message);
 

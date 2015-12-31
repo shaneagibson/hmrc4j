@@ -1,5 +1,9 @@
 package uk.co.epsilontechnologies.hmrc4j.core.oauth20;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -56,6 +60,21 @@ public class Token {
 
     public boolean isExpired() {
         return Instant.now().isAfter(createdAt.plus(expiresIn - EXPIRY_SKEW_IN_SECONDS, ChronoUnit.SECONDS));
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
 }
