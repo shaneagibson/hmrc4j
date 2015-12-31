@@ -56,4 +56,4 @@ For an example of how to use HMRC4J, take a look at the `hmrc4j-sample` module. 
 
     > mvn clean install spring-boot:run
     
-Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample)`.
+Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample).
