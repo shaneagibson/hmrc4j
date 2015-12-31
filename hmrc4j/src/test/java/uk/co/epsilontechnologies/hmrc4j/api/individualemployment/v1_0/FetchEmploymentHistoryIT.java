@@ -3,8 +3,6 @@ package uk.co.epsilontechnologies.hmrc4j.api.individualemployment.v1_0;
 import org.junit.Assert;
 import org.junit.Test;
 import uk.co.epsilontechnologies.hmrc4j.AbstractUserRestrictedIT;
-import uk.co.epsilontechnologies.hmrc4j.api.individualbenefits.v1_0.IndividualBenefitsAPI;
-import uk.co.epsilontechnologies.hmrc4j.api.individualbenefits.v1_0.model.AnnualBenefitsSummary;
 import uk.co.epsilontechnologies.hmrc4j.api.individualemployment.v1_0.model.EmploymentHistories;
 import uk.co.epsilontechnologies.hmrc4j.core.model.TaxYear;
 import uk.co.epsilontechnologies.hmrc4j.core.model.UTR;

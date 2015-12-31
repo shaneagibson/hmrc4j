@@ -1,7 +1,7 @@
 package uk.co.epsilontechnologies.hmrc4j.core.oauth20.endpoint;
 
-import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.API;
+import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 
 import java.net.MalformedURLException;

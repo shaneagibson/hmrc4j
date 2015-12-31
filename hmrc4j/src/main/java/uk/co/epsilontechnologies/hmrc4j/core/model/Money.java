@@ -1,9 +1,5 @@
 package uk.co.epsilontechnologies.hmrc4j.core.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;

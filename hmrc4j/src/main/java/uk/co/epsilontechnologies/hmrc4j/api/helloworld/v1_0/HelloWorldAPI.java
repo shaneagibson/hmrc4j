@@ -4,12 +4,12 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import uk.co.epsilontechnologies.hmrc4j.core.API;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcContext;
+import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.aop.ApplicationRestricted;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.aop.Unrestricted;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.aop.UserRestricted;
-import uk.co.epsilontechnologies.hmrc4j.core.API;
-import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 
 import java.util.Optional;
 

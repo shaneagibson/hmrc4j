@@ -7,8 +7,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
-import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.API;
+import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Token;
 

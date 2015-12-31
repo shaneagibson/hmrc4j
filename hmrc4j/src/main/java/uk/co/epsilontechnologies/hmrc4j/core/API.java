@@ -2,16 +2,11 @@ package uk.co.epsilontechnologies.hmrc4j.core;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
-import uk.co.epsilontechnologies.hmrc4j.core.HmrcContext;
-import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidTaxYearException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidUTRException;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Token;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Optional;
 
 public abstract class API {

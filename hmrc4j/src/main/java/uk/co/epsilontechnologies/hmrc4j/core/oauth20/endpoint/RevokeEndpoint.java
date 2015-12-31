@@ -4,8 +4,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.API;
+import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 
 public class RevokeEndpoint {
 

@@ -3,8 +3,6 @@ package uk.co.epsilontechnologies.hmrc4j.api.individualtax.v1_0;
 import org.junit.Assert;
 import org.junit.Test;
 import uk.co.epsilontechnologies.hmrc4j.AbstractUserRestrictedIT;
-import uk.co.epsilontechnologies.hmrc4j.api.individualincome.v1_0.IndividualIncomeAPI;
-import uk.co.epsilontechnologies.hmrc4j.api.individualincome.v1_0.model.AnnualIncomeSummary;
 import uk.co.epsilontechnologies.hmrc4j.api.individualtax.v1_0.model.AnnualTaxSummary;
 import uk.co.epsilontechnologies.hmrc4j.core.model.TaxYear;
 import uk.co.epsilontechnologies.hmrc4j.core.model.UTR;

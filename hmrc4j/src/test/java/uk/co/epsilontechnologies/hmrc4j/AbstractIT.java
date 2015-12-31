@@ -3,7 +3,6 @@ package uk.co.epsilontechnologies.hmrc4j;
 import uk.co.epsilontechnologies.hmrc4j.core.API;
 import uk.co.epsilontechnologies.hmrc4j.core.Hmrc;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
-import uk.co.epsilontechnologies.hmrc4j.core.HmrcFactory;
 
 import java.io.File;
 import java.io.FileReader;
