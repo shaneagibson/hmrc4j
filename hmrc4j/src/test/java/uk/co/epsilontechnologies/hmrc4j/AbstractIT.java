@@ -34,6 +34,7 @@ public abstract class AbstractIT {
     private static Properties loadConfig() {
         try {
             final Properties config = new Properties();
+            config.load(new FileReader(new File("src/test/resources/base.properties")));
             config.load(new FileReader(new File("src/test/resources/secure.properties")));
             return config;
         } catch (final IOException e) {
