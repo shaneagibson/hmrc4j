@@ -42,7 +42,7 @@ public class IndividualEmploymentAPI extends API {
         try {
             final HttpResponse<JsonNode> jsonResponse = Unirest
                     .get(url(String.format("/sa/%s?taxYear=%s", saUtr.getValue(), taxYear.getValue())))
-                    .header("Authorization", String.format("Bearer %s", userToken()))
+                    .header("Authorization", String.format("Bearer %s", userToken().orElse("")))
                     .header("Accept", acceptHeader("json")).asJson();
             switch (jsonResponse.getStatus()) {
                 case 200 : return toEmploymentHistories(jsonResponse.getBody().getObject());

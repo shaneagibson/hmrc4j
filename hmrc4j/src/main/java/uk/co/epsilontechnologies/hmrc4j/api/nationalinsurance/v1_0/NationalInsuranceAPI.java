@@ -41,7 +41,7 @@ public class NationalInsuranceAPI extends API {
         try {
             final HttpResponse<JsonNode> jsonResponse = Unirest
                     .get(url(String.format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue())))
-                    .header("Authorization", String.format("Bearer %s", userToken()))
+                    .header("Authorization", String.format("Bearer %s", userToken().orElse("")))
                     .header("Accept", acceptHeader("json")).asJson();
             switch (jsonResponse.getStatus()) {
                 case 200 : return toAnnualNicsSummary(jsonResponse.getBody().getObject());
@@ -58,8 +58,8 @@ public class NationalInsuranceAPI extends API {
 
     private AnnualNicsSummary toAnnualNicsSummary(final JSONObject json) {
         return new AnnualNicsSummary(
-                new Class1(new Money(json.getString("totalNICableEarnings"))),
-                new Class2(new Money(json.getString("totalDue"))),
+                new Class1(new Money(String.valueOf(json.getJSONObject("class1").get("totalNICableEarnings")))),
+                new Class2(new Money(String.valueOf(json.getJSONObject("class2").get("totalDue")))),
                 json.getBoolean("maxNICsReached"));
     }
 

@@ -44,7 +44,7 @@ public class IndividualIncomeAPI extends API {
         try {
             final HttpResponse<JsonNode> jsonResponse = Unirest
                     .get(url(String.format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue())))
-                    .header("Authorization", String.format("Bearer %s", userToken()))
+                    .header("Authorization", String.format("Bearer %s", userToken().orElse("")))
                     .header("Accept", acceptHeader("json")).asJson();
             switch (jsonResponse.getStatus()) {
                 case 200 : return toAnnualIncomeSummary(jsonResponse.getBody().getObject());
@@ -72,15 +72,15 @@ public class IndividualIncomeAPI extends API {
 
     private PensionsAnnuitiesAndOtherStateBenefitsIncome toPensionsAnnuitiesAndOtherStateBenefitsIncome(final JSONObject json) {
         return new PensionsAnnuitiesAndOtherStateBenefitsIncome(
-                new Money(json.getString("otherPensionsAndRetirementAnnuities")),
-                new Money(json.getString("incapacityBenefit")),
-                new Money(json.getString("jobseekersAllowance")));
+                new Money(String.valueOf(json.get("otherPensionsAndRetirementAnnuities"))),
+                new Money(String.valueOf(json.get("incapacityBenefit"))),
+                new Money(String.valueOf(json.get("jobseekersAllowance"))));
     }
 
     private EmploymentIncome toEmploymentIncome(final JSONObject json) {
         return new EmploymentIncome(
                 new PAYEReference(json.getString("employerPayeReference")),
-                new Money(json.getString("payFromEmployment")));
+                new Money(String.valueOf(json.get("payFromEmployment"))));
     }
 
 }

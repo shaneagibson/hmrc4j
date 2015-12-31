@@ -41,9 +41,10 @@ public class IndividualBenefitsAPI extends API {
     @UserRestricted(scope = Scope.READ_INDIVIDUAL_BENEFITS)
     public AnnualBenefitsSummary fetchAnnualBenefitsSummary(final UTR saUtr, final TaxYear taxYear) throws InvalidUTRException, InvalidTaxYearException {
         try {
+            System.out.println(getContext().getTokenManager().get().getToken().get());
             final HttpResponse<JsonNode> jsonResponse = Unirest
                     .get(url(String.format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue())))
-                    .header("Authorization", String.format("Bearer %s", userToken()))
+                    .header("Authorization", String.format("Bearer %s", userToken().orElse("")))
                     .header("Accept", acceptHeader("json")).asJson();
             switch (jsonResponse.getStatus()) {
                 case 200 : return toAnnualBenefitsSummary(jsonResponse.getBody().getObject());
@@ -71,14 +72,14 @@ public class IndividualBenefitsAPI extends API {
     private EmploymentBenefits toEmploymentBenefits(final JSONObject json) {
         return new EmploymentBenefits(
                 new PAYEReference(json.getString("employerPayeReference")),
-                new Money(json.getString("companyCarsAndVansBenefit")),
-                new Money(json.getString("fuelForCompanyCarsAndVansBenefit")),
-                new Money(json.getString("privateMedicalDentalInsurance")),
-                new Money(json.getString("vouchersCreditCardsExcessMileageAllowance")),
-                new Money(json.getString("goodsEtcProvidedByEmployer")),
-                new Money(json.getString("accommodationProvidedByEmployer")),
-                new Money(json.getString("otherBenefits")),
-                new Money(json.getString("expensesPaymentsReceived")));
+                new Money(String.valueOf(json.get("companyCarsAndVansBenefit"))),
+                new Money(String.valueOf(json.get("fuelForCompanyCarsAndVansBenefit"))),
+                new Money(String.valueOf(json.get("privateMedicalDentalInsurance"))),
+                new Money(String.valueOf(json.get("vouchersCreditCardsExcessMileageAllowance"))),
+                new Money(String.valueOf(json.get("goodsEtcProvidedByEmployer"))),
+                new Money(String.valueOf(json.get("accommodationProvidedByEmployer"))),
+                new Money(String.valueOf(json.get("otherBenefits"))),
+                new Money(String.valueOf(json.get("expensesPaymentsReceived"))));
     }
 
 }

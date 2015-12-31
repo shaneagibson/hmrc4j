@@ -45,7 +45,7 @@ public class IndividualTaxAPI extends API {
         try {
             final HttpResponse<JsonNode> jsonResponse = Unirest
                     .get(url(String.format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue())))
-                    .header("Authorization", String.format("Bearer %s", userToken()))
+                    .header("Authorization", String.format("Bearer %s", userToken().orElse("")))
                     .header("Accept", acceptHeader("json")).asJson();
             switch (jsonResponse.getStatus()) {
                 case 200 : return toAnnualTaxSummary(jsonResponse.getBody().getObject());
@@ -76,19 +76,19 @@ public class IndividualTaxAPI extends API {
     }
 
     private TaxRefunds toTaxRefunds(final JSONObject json) {
-        return new TaxRefunds(new Money(json.getString("taxRefundedOrSetOff")));
+        return new TaxRefunds(new Money(String.valueOf(json.get("taxRefundedOrSetOff"))));
     }
 
     private PensionsAnnuitiesAndOtherStateBenefitsTax toPensionsAnnuitiesAndOtherStateBenefitsTax(final JSONObject json) {
         return new PensionsAnnuitiesAndOtherStateBenefitsTax(
-                new Money(json.getString("otherPensionsAndRetirementAnnuities")),
-                new Money(json.getString("incapacityBenefit")));
+                new Money(String.valueOf(json.get("otherPensionsAndRetirementAnnuities"))),
+                new Money(String.valueOf(json.get("incapacityBenefit"))));
     }
 
     private EmploymentTax toEmploymentTax(final JSONObject json) {
         return new EmploymentTax(
                 new PAYEReference(json.getString("employerPayeReference")),
-                new Money(json.getString("taxTakenOffPay")));
+                new Money(String.valueOf(json.get("taxTakenOffPay"))));
     }
 
 }
