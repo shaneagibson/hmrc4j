@@ -6,7 +6,7 @@
     <parent>
         <artifactId>hmrc4j-parent</artifactId>
         <groupId>uk.co.epsilontechnologies</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
