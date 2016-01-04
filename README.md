@@ -1,7 +1,5 @@
 # HMRC4J - A Java Library for the HMRC API
 
-> DISCLAIMER : This Library is still a work-in-progress, and is still subject to further testing. It is not yet production-ready.
-
 This library is provides a java-wrapper for HMRC's growing collection of APIs. For more information on what APIs are available, how to register as a developer and start using this library, take a look at the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation). 
 
 ### Accessing an Unrestricted Endpoint
