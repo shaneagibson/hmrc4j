@@ -5,6 +5,6 @@
 *.ear
 *.iml
 hs_err_pid*
-
+*.log
 **/target
 **/secure.properties
