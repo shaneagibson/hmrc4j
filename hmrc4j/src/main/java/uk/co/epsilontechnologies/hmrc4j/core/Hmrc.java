@@ -1,6 +1,7 @@
 package uk.co.epsilontechnologies.hmrc4j.core;
 
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
+import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Token;
 
 import java.net.URL;
 import java.util.Optional;
@@ -31,5 +32,7 @@ public interface Hmrc {
      * Revokes the current OAuth 2.0 authority.
      */
     void revokeAuthority();
+
+    void exchange(final String authorizationCode);
 
 }

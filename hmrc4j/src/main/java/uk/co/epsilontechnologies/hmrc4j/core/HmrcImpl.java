@@ -77,4 +77,9 @@ public class HmrcImpl implements Hmrc {
         this.hmrcContext.getTokenManager().orElseThrow(() -> new IllegalStateException("no token manager found")).revokeToken();
     }
 
+    @Override
+    public void exchange(final String authorizationCode) {
+        this.hmrcContext.getTokenManager().orElseThrow(() -> new IllegalStateException("no token manager found")).exchange(authorizationCode);
+    }
+
 }

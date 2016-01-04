@@ -41,7 +41,6 @@ public class IndividualBenefitsAPI extends API {
     @UserRestricted(scope = Scope.READ_INDIVIDUAL_BENEFITS)
     public AnnualBenefitsSummary fetchAnnualBenefitsSummary(final UTR saUtr, final TaxYear taxYear) throws InvalidUTRException, InvalidTaxYearException {
         try {
-            System.out.println(getContext().getTokenManager().get().getToken().get());
             final HttpResponse<JsonNode> jsonResponse = Unirest
                     .get(url(String.format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue())))
                     .header("Authorization", String.format("Bearer %s", userToken().orElse("")))

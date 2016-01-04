@@ -56,4 +56,10 @@ public class TokenManager {
                 tokenStore.getState());
     }
 
+    public void exchange(final String authorizationCode) {
+        tokenStore.setToken(tokenEndpoint.exchange(
+                authorizationCode,
+                tokenStore.getRedirectUri().orElseThrow(() -> new IllegalStateException("no redirect uri found in tokenstore"))));
+    }
+
 }

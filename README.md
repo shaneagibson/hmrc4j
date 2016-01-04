@@ -50,10 +50,10 @@ Your application should provide an instance of your Token Store, where HMRC4J ca
 
     Assert.assertEquals("Hello User", message);
 
-### Sample Application
+### Sample Applications
 
-For an example of how to use HMRC4J, take a look at the `hmrc4j-sample` module. To run the sample application, clone the repository then run:
+For an example of how to use HMRC4J, take a look at the `hmrc4j-samples` module. To run a sample application, clone the repository, change directory to the desired sample, then run:
 
-    > mvn clean install spring-boot:run
+    > mvn spring-boot:run
     
 Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample).

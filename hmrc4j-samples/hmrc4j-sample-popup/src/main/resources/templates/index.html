@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>HMRC4J Sample Application</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <script>
+            function openOAuth20(location) {
+                var oauth20Window = PopupCenter(location, "", 700, 600);
+                var timer = setInterval(function() {
+                    if (oauth20Window.closed) {
+                        clearInterval(timer);
+                        window.location = "/hmrc4j/sample/oauth20/status";
+                    }
+                }, 500);
+            }
+            function PopupCenter(url, title, w, h) {
+
+                var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+                var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+                var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+                var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+                var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+                var top = ((height / 2) - (h / 2)) + dualScreenTop;
+                var newWindow = window.open(url, title, 'menubar=no, status=no, titlebar=no, toolbar=no, scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+                if (window.focus) {
+                    newWindow.focus();
+                }
+
+                return newWindow;
+            }
+        </script>
+
+        <div class="container">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/hmrc4j/sample">HMRC4J Sample Application</a>
+                    </div>
+                </div>
+            </nav>
+
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <td>/hello/world</td>
+                        <td>Say Hello World</td>
+                        <td>
+                            <a class="btn btn-primary" href="/hmrc4j/sample/hello/world">Try it</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/hello/application</td>
+                        <td>Say Hello Application</td>
+                        <td>
+                            <a class="btn btn-primary" href="/hmrc4j/sample/hello/application">Try it</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/hello/user</td>
+                        <td>Say Hello User</td>
+                        <td>
+                            <a th:if="${!connected}" class="btn btn-success" th:onclick="'openOAuth20(\''+${connectUrl}+'\')'">Connect to HMRC</a>
+                            <a th:if="${connected}" class="btn btn-primary" href="/hmrc4j/sample/hello/user">Try it</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br/>
+            <br/>
+
+            <a th:if="${connected}" class="btn btn-danger" href="/hmrc4j/sample/revoke">Disconnect from HMRC</a>
+
+            <br/>
+            <br/>
+
+            <samp th:if="${message != null}" th:text="${message}" />
+
+        </div>
+
+    </body>
+</html>

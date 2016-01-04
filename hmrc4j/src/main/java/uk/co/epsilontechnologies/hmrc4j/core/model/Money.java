@@ -4,7 +4,15 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 
+/**
+ * A domain-specific wrapper for {@code java.lang.BigDecimal} to represent Money.
+ * The currency is always GBP.
+ */
 public class Money extends BigDecimal {
+
+    public Money(String val) {
+        super(val);
+    }
 
     private Money(char[] in, int offset, int len) {
         super(in, offset, len);
@@ -20,10 +28,6 @@ public class Money extends BigDecimal {
 
     private Money(char[] in, MathContext mc) {
         super(in, mc);
-    }
-
-    public Money(String val) {
-        super(val);
     }
 
     private Money(String val, MathContext mc) {
