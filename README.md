@@ -55,3 +55,9 @@ For an example of how to use HMRC4J, take a look at the `hmrc4j-samples` module.
     > mvn spring-boot:run
     
 Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample).
+
+NOTE: you will need to create a file under `src/main/resources/config` called `secure.properties`, and add the following values:
+
+    hmrc.credentials.client_id=[YOUR-CLIENT-ID]
+    hmrc.credentials.client_secret=[YOUR-CLIENT-SECRET]
+    hmrc.credentials.server_token=[YOUR-SERVER-TOKEN]
