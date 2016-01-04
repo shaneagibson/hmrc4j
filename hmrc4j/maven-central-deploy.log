@@ -1,0 +1,84 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for uk.co.epsilontechnologies:hmrc4j:jar:1.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.apache.httpcomponents:httpclient:jar -> version 4.3.6 vs 4.5.1 @ uk.co.epsilontechnologies:hmrc4j:[unknown-version], /Users/shane/Development/epsilontechnologies/hmrc4j/hmrc4j/pom.xml, line 205, column 21
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ uk.co.epsilontechnologies:hmrc4j:[unknown-version], /Users/shane/Development/epsilontechnologies/hmrc4j/hmrc4j/pom.xml, line 109, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] Inspecting build with total of 1 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 1 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building hmrc4j 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-release-plugin:2.5:clean (default-cli) @ hmrc4j ---
+[INFO] Downloading: https://repo.maven.apache.org/maven2/regexp/regexp/1.3/regexp-1.3.pom
+[INFO] Downloaded: https://repo.maven.apache.org/maven2/regexp/regexp/1.3/regexp-1.3.pom (0 B at 0.0 KB/sec)
+[INFO] Downloading: https://repo.maven.apache.org/maven2/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.pom
+[INFO] Downloaded: https://repo.maven.apache.org/maven2/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.pom (0 B at 0.0 KB/sec)
+[INFO] Downloading: https://repo.maven.apache.org/maven2/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.pom
+[INFO] Downloaded: https://repo.maven.apache.org/maven2/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.pom (0 B at 0.0 KB/sec)
+[INFO] Downloading: https://repo.maven.apache.org/maven2/regexp/regexp/1.3/regexp-1.3.jar
+[INFO] Downloading: https://repo.maven.apache.org/maven2/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar
+[INFO] Downloading: https://repo.maven.apache.org/maven2/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.jar
+[INFO] Downloaded: https://repo.maven.apache.org/maven2/regexp/regexp/1.3/regexp-1.3.jar (0 B at 0.0 KB/sec)
+[INFO] Downloaded: https://repo.maven.apache.org/maven2/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.jar (0 B at 0.0 KB/sec)
+[INFO] Downloaded: https://repo.maven.apache.org/maven2/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar (0 B at 0.0 KB/sec)
+[INFO] Cleaning up after release...
+[INFO] 
+[INFO] --- maven-release-plugin:2.5:prepare (default-cli) @ hmrc4j ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 15.800 s
+[INFO] Finished at: 2016-01-04T16:05:52+05:45
+[INFO] Final Memory: 17M/177M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-release-plugin:2.5:prepare (default-cli) on project hmrc4j: Missing required setting: scm connection or developerConnection must be specified. -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-release-plugin:2.5:prepare (default-cli) on project hmrc4j: Missing required setting: scm connection or developerConnection must be specified.
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:862)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:286)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:197)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: org.apache.maven.plugin.MojoFailureException: Missing required setting: scm connection or developerConnection must be specified.
+	at org.apache.maven.plugins.release.PrepareReleaseMojo.prepareRelease(PrepareReleaseMojo.java:285)
+	at org.apache.maven.plugins.release.PrepareReleaseMojo.execute(PrepareReleaseMojo.java:232)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	... 20 more
+Caused by: org.apache.maven.shared.release.ReleaseFailureException: Missing required setting: scm connection or developerConnection must be specified.
+	at org.apache.maven.shared.release.phase.CheckPomPhase.execute(CheckPomPhase.java:77)
+	at org.apache.maven.shared.release.DefaultReleaseManager.prepare(DefaultReleaseManager.java:234)
+	at org.apache.maven.shared.release.DefaultReleaseManager.prepare(DefaultReleaseManager.java:169)
+	at org.apache.maven.shared.release.DefaultReleaseManager.prepare(DefaultReleaseManager.java:146)
+	at org.apache.maven.shared.release.DefaultReleaseManager.prepare(DefaultReleaseManager.java:107)
+	at org.apache.maven.plugins.release.PrepareReleaseMojo.prepareRelease(PrepareReleaseMojo.java:277)
+	... 23 more
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

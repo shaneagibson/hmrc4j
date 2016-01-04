@@ -77,6 +77,12 @@ public class HmrcImpl implements Hmrc {
         this.hmrcContext.getTokenManager().orElseThrow(() -> new IllegalStateException("no token manager found")).revokeToken();
     }
 
+    /**
+     * Exchanges the Authorization Code for an OAuth 2.0 Token, using the token endpoint.
+     * The token is persisted via the TokenStore implementation.
+     *
+     * @param authorizationCode the code to exchange
+     */
     @Override
     public void exchange(final String authorizationCode) {
         this.hmrcContext.getTokenManager().orElseThrow(() -> new IllegalStateException("no token manager found")).exchange(authorizationCode);

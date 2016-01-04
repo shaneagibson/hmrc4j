@@ -33,6 +33,11 @@ public interface Hmrc {
      */
     void revokeAuthority();
 
+    /**
+     * Exchanges the Authorization Code for an OAuth 2.0 Token, using the token endpoint.
+     *
+     * @param authorizationCode the code to exchange
+     */
     void exchange(final String authorizationCode);
 
 }

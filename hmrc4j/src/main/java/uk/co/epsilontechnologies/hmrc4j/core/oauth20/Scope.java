@@ -54,7 +54,8 @@ public enum Scope {
     }
 
     /**
-     * Utility method for converting a space-separated @{code String} of scopes to a @{code List<Scope>}
+     * Utility method for converting a space-separated String of scopes to a List of Scopes
+     *
      * @param scope the space-separated string of scopes to convert
      * @return the list of scopes
      */
@@ -63,7 +64,8 @@ public enum Scope {
     }
 
     /**
-     * Utility method for converting a @{code List<Scope>} to a space-separated @{code String}.
+     * Utility method for converting a List of Scopes to a space-separated String.
+     *
      * @param scope the list of scopes to convert
      * @return the space-separated string
      */
