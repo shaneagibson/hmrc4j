@@ -2,6 +2,17 @@
 
 This library is provides a java-wrapper for HMRC's growing collection of APIs. For more information on what APIs are available, how to register as a developer and start using this library, take a look at the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation). 
 
+## Usage
+
+You can integrate the latest version of hmrc4j into your Maven project by including the following dependency in your pom.xml file.
+
+       <dependency>
+           <groupId>uk.co.epsilontechnologies</groupId>
+           <artifactId>hmrc4j</artifactId>
+           <version>0.0.1</version>
+       </dependency>
+
+
 ### Accessing an Unrestricted Endpoint
 
 An unrestricted endpoint is accessible without a `server_token` or OAuth 2.0 `access_token`.
