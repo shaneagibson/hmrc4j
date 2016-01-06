@@ -1,6 +1,8 @@
 package uk.co.epsilontechnologies.hmrc4j.core.oauth20.servlet;
 
+import uk.co.epsilontechnologies.hmrc4j.core.Hmrc;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
+import uk.co.epsilontechnologies.hmrc4j.core.HmrcFactory;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidStateException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.RedirectUriMismatchException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.UserDeniedAuthorizationException;
@@ -16,10 +18,10 @@ import java.util.Optional;
 
 public abstract class AbstractAuthorizeRedirectServlet extends HttpServlet {
 
-    private final TokenEndpoint tokenEndpoint;
+    private final HmrcCredentials hmrcCredentials;
 
     public AbstractAuthorizeRedirectServlet(final HmrcCredentials hmrcCredentials) {
-        this.tokenEndpoint = new TokenEndpoint(hmrcCredentials);
+        this.hmrcCredentials = hmrcCredentials;
     }
 
     @Override
@@ -48,9 +50,9 @@ public abstract class AbstractAuthorizeRedirectServlet extends HttpServlet {
 
         final String authorizationCode = optionalParameter("code", request).orElseThrow(UserDeniedAuthorizationException::new);
 
-        final String redirectUri = tokenStore.getRedirectUri().orElseThrow(RedirectUriMismatchException::new);
+        final Hmrc hmrc = HmrcFactory.createForUserRestrictedAccess(hmrcCredentials, tokenStore);
 
-        tokenStore.setToken(tokenEndpoint.exchange(authorizationCode, redirectUri));
+        hmrc.exchange(authorizationCode);
     }
 
     private boolean isStateValid(final HttpServletRequest request, final TokenStore tokenStore) {
