@@ -2,7 +2,7 @@
 
 This library is provides a java-wrapper for HMRC's growing collection of APIs. For more information on what APIs are available, how to register as a developer and start using this library, take a look at the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation). 
 
-## Usage
+## Installation
 
 You can integrate the latest version of hmrc4j into your Maven project by including the following dependency in your pom.xml file.
 
@@ -12,6 +12,8 @@ You can integrate the latest version of hmrc4j into your Maven project by includ
            <version>0.0.1</version>
        </dependency>
 
+
+## Usage
 
 ### Accessing an Unrestricted Endpoint
 
