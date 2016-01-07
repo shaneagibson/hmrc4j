@@ -41,22 +41,49 @@ public abstract class API {
         return hmrcContext;
     }
 
+    /**
+     * Formats the given media type into an accept header value, containing the version for this API.
+     *
+     * For example:
+     *   "application/vnd.hmrc.1.0+json"
+     *
+     * @param mediaType the media type (i.e. "xml" or "json")
+     * @return the accept header value
+     */
     protected String acceptHeader(final String mediaType) {
         return String.format("application/vnd.hmrc.%s+%s", version(), mediaType);
     }
 
+    /**
+     * Fetches the optional server_token for this API.
+     * @return the server token value
+     */
     protected Optional<String> serverToken() {
         return hmrcContext.getCredentials().map(HmrcCredentials::getServerToken);
     }
 
+    /**
+     * Fetches the optional OAuth 2.0 access_token (a.k.a the "User" token) for this API.
+     * @return the user token value
+     */
     protected Optional<String> userToken() {
         return hmrcContext.getTokenManager().map(tokenManager -> tokenManager.getToken().map(Token::getAccessToken)).orElse(Optional.empty());
     }
 
+    /**
+     * Prefixes the given path with the base URL and context for this API.
+     * @param path the path to prefix
+     * @return the full url
+     */
     protected String url(final String path) {
         return String.format("%s/%s%s", BASE_URL, context(), path);
     }
 
+    /**
+     * Handles an unexpected API HTTP Response by converting the status and body into a RuntimeException
+     * @param jsonResponse the unexpected http response
+     * @return a runtime exception
+     */
     protected RuntimeException handleUnexpectedResponse(final HttpResponse<JsonNode> jsonResponse) {
         return new RuntimeException(String.format(
                 "%s %s %s",
@@ -65,29 +92,66 @@ public abstract class API {
                 jsonResponse.getBody().toString()));
     }
 
+    /**
+     * Declares the version for this API.
+     * @return the version of the API
+     */
     protected abstract String version();
 
+    /**
+     * Declares the context for this API.
+     * @return the context of the API
+     */
     protected abstract String context();
 
-    protected boolean isError(final String code, final HttpResponse<JsonNode> jsonResponse) {
+    /**
+     * Determines if the given API HTTP Response matches the given error code.
+     *
+     * @param errorCode the expected error code
+     * @param jsonResponse the HTTP response to check
+     * @return true if the error in the HTTP response is the same as the errorCode parameter, otherwise false.
+     */
+    protected boolean matchError(final String errorCode, final HttpResponse<JsonNode> jsonResponse) {
         final JSONObject json = jsonResponse.getBody().getObject();
-        return json.getString("code").equals(code);
+        return json.has("code") && json.getString("code").equals(errorCode);
     }
 
+    /**
+     * Determines if the HTTP Response contains an invalid UTR error response.
+     *
+     * @param jsonResponse the HTTP response to check
+     * @return true if the HTTP response contains an Invalid SA UTR error.
+     */
     protected boolean isInvalidUtr(final HttpResponse<JsonNode> jsonResponse) {
-        return isError("SA_UTR_INVALID", jsonResponse);
+        return matchError("SA_UTR_INVALID", jsonResponse);
     }
 
+    /**
+     * Determines if the HTTP Response contains an invalid Tax Year error response.
+     *
+     * @param jsonResponse the HTTP response to check
+     * @return true if the HTTP response contains an Invalid Tax Year error.
+     */
     protected boolean isInvalidTaxYear(final HttpResponse<JsonNode> jsonResponse) {
-        return isError("TAX_YEAR_INVALID", jsonResponse);
+        return matchError("TAX_YEAR_INVALID", jsonResponse);
     }
 
-    protected void handleInvalidTaxYear(final HttpResponse<JsonNode> jsonResponse) throws InvalidTaxYearException {
-        throw new InvalidTaxYearException(jsonResponse.getBody().getObject().getString("message"));
+    /**
+     * Handles an Tnvalid Tax Year error by convering the HTTP response into an InvalidTaxYearException.
+     * @param jsonResponse the invalid HTTP response
+     * @return the invalid tax year exception
+     */
+    protected InvalidTaxYearException handleInvalidTaxYear(final HttpResponse<JsonNode> jsonResponse) {
+        return new InvalidTaxYearException(jsonResponse.getBody().getObject().getString("message"));
     }
 
-    protected void handleInvalidUtr(final HttpResponse<JsonNode> jsonResponse) throws InvalidUTRException {
-        throw new InvalidUTRException(jsonResponse.getBody().getObject().getString("message"));
+    /**
+     * Handles an Tnvalid UTR error by convering the HTTP response into an InvalidUTRException.
+     * @param jsonResponse the invalid HTTP response
+     * @return the invalid UTR exception
+     */
+    protected InvalidUTRException handleInvalidUtr(final HttpResponse<JsonNode> jsonResponse) {
+        return new InvalidUTRException(jsonResponse.getBody().getObject().getString("message"));
     }
 
 }

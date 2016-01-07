@@ -46,8 +46,8 @@ public class NationalInsuranceAPI extends API {
             switch (jsonResponse.getStatus()) {
                 case 200 : return toAnnualNicsSummary(jsonResponse.getBody().getObject());
                 case 400 : {
-                    if (isInvalidUtr(jsonResponse)) handleInvalidUtr(jsonResponse);
-                    if (isInvalidTaxYear(jsonResponse)) handleInvalidTaxYear(jsonResponse);
+                    if (isInvalidUtr(jsonResponse)) throw handleInvalidUtr(jsonResponse);
+                    if (isInvalidTaxYear(jsonResponse)) throw handleInvalidTaxYear(jsonResponse);
                 }
                 default : throw handleUnexpectedResponse(jsonResponse);
             }

@@ -8,9 +8,16 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * A Model Object representing an OAuth 2.0 Token.
+ */
 public class Token {
 
-    private static final long EXPIRY_SKEW_IN_SECONDS = 120;
+    /**
+     * The skew applied to timestamp expiry. This is to prevent a token from expiring between the time that the
+     * expiration check is performed and when the request is issued.
+     */
+    private static final long EXPIRY_SKEW_IN_SECONDS = 10;
 
     private final String accessToken;
     private final String refreshToken;
@@ -58,6 +65,10 @@ public class Token {
         return createdAt;
     }
 
+    /**
+     * Determines if the token has expired.
+     * @return true if the token has expired, otherwise false.
+     */
     public boolean isExpired() {
         return Instant.now().isAfter(createdAt.plus(expiresIn - EXPIRY_SKEW_IN_SECONDS, ChronoUnit.SECONDS));
     }
