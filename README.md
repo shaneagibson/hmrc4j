@@ -9,9 +9,23 @@ You can integrate the latest version of hmrc4j into your Maven project by includ
        <dependency>
            <groupId>uk.co.epsilontechnologies</groupId>
            <artifactId>hmrc4j</artifactId>
-           <version>0.0.1</version>
+           <version>1.0.0</version>
        </dependency>
 
+If your maven repository is not configured to proxy bintray, you may have to add the following configuration to your project's pom.xml:
+
+       <repositories>
+         <repository>
+           <id>bintray</id>
+           <url>https://dl.bintray.com/shaneagibson/maven/</url>
+           <releases>
+             <enabled>true</enabled>
+           </releases>
+           <snapshots>
+             <enabled>false</enabled>
+           </snapshots>
+         </repository>
+       </repositories>
 
 ## Usage
 
@@ -60,10 +74,13 @@ Your application should provide an instance of your Token Store, where HMRC4J ca
     final String message = hmrc.getAPI(HelloWorldAPI.class).sayHelloUser();
 
     Assert.assertEquals("Hello User", message);
+ 
 
-### Sample Applications
+## Sample Applications
 
-For an example of how to use HMRC4J, take a look at the `hmrc4j-samples` module. To run a sample application, clone the repository, change directory to the desired sample, then run:
+For an example of how to use HMRC4J, take a look at the `hmrc4j-samples` module. These sample applications are for illustrative purposes only (clearly not production-standard code!). They use [Spring Boot](http://projects.spring.io/spring-boot/) as the application framework. 
+
+To run a sample application, clone the repository, change directory to the desired sample, then run:
 
     > mvn spring-boot:run
     
