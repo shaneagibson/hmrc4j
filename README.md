@@ -2,6 +2,15 @@
 
 This library is provides a java-wrapper for HMRC's growing collection of APIs. For more information on what APIs are available, how to register as a developer and start using this library, take a look at the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation). 
 
+## Key Benefits
+
+- A simple, lightweight Java interface to HMRC's RESTful APIs
+- Consistently defined boilerplate API implementations (including necessary exception handling)
+- Integration with HMRC's key OAuth 2.0 operations (Authorize, Token, and Revoke endpoints)
+- Automatic refreshing of expired OAuth 2.0 tokens prior to use (using AspectJ)
+- Encapsulation of HMRC's OAuth 2.0 token via a simple [TokenStore](https://github.com/shaneagibson/hmrc4j/blob/master/hmrc4j/src/main/java/uk/co/epsilontechnologies/hmrc4j/core/oauth20/TokenStore.java) interface
+- Extensible architecture, so you can provide your own bespoke API implementations and still receive these same benefits
+
 ## Installation
 
 You can integrate the latest version of hmrc4j into your Maven project by including the following dependency in your pom.xml file.
@@ -75,6 +84,7 @@ Your application should provide an instance of your Token Store, where HMRC4J ca
 
     Assert.assertEquals("Hello User", message);
  
+One key benefit of using HMRC4J is that you do not need to worry about your OAuth 2.0 access_token expiry or having to refresh a token prior to use - this is all handled behind the scenes by HMRC4J's core framework.
 
 ## Sample Applications
 
