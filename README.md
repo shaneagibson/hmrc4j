@@ -12,7 +12,7 @@ You can integrate the latest version of hmrc4j into your Maven project by includ
            <version>1.0.0</version>
        </dependency>
 
-If your maven repository is not configured to proxy bintray, you may have to add the following configuration to your project's pom.xml:
+If your maven repository is not configured to proxy [Bintray](https://bintray.com/), you may have to add the following configuration to your project's pom.xml:
 
        <repositories>
          <repository>
@@ -86,7 +86,7 @@ To run a sample application, clone the repository, change directory to the desir
     
 Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample).
 
-NOTE: you will need to create a file under `src/main/resources/config` called `secure.properties`, and add the following values:
+NOTE: you will need to create a file under `/hmrc/hmrc-samples/[sample-project]/src/main/resources/config` called `secure.properties`, and add the following values:
 
     hmrc.credentials.client_id=[YOUR-CLIENT-ID]
     hmrc.credentials.client_secret=[YOUR-CLIENT-SECRET]
