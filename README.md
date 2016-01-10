@@ -2,7 +2,7 @@
 
 This library is provides a java-wrapper for HMRC's growing collection of APIs. For more information on what APIs are available, how to register as a developer and start using this library, take a look at the [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/api-documentation). 
 
-## Key Benefits
+## Benefits
 
 - A simple, lightweight Java interface to HMRC's RESTful APIs
 - Consistently defined boilerplate API implementations (including necessary exception handling)
