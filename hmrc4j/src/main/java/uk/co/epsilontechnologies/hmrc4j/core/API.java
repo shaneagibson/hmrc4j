@@ -2,6 +2,9 @@ package uk.co.epsilontechnologies.hmrc4j.core;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.request.GetRequest;
+import com.mashape.unirest.request.HttpRequest;
 import org.json.JSONObject;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidTaxYearException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidUTRException;
@@ -50,7 +53,7 @@ public abstract class API {
      * @param mediaType the media type (i.e. "xml" or "json")
      * @return the accept header value
      */
-    protected String acceptHeader(final String mediaType) {
+    protected String formatAcceptHeader(final String mediaType) {
         return String.format("application/vnd.hmrc.%s+%s", version(), mediaType);
     }
 
@@ -75,7 +78,7 @@ public abstract class API {
      * @param path the path to prefix
      * @return the full url
      */
-    protected String url(final String path) {
+    protected String formatUrl(final String path) {
         return String.format("%s/%s%s", BASE_URL, context(), path);
     }
 
@@ -90,6 +93,25 @@ public abstract class API {
                 jsonResponse.getStatus(),
                 jsonResponse.getStatusText(),
                 jsonResponse.getBody().toString()));
+    }
+
+    /**
+     * Convenience method for creating a HTTP GET Request for the given path
+     * @param path the path to GET
+     * @return the HTTP GET Request
+     */
+    protected GetRequest get(final String path) {
+        return Unirest.get(formatUrl(path));
+    }
+
+    /**
+     * Convenience method for adding a header to the HTTP Request
+     * @param request the HTTP request
+     * @param key the name of the header to add
+     * @param value the value of the header to add
+     */
+    protected void addHeader(final HttpRequest request, final String key, final String value) {
+        request.header(key, value);
     }
 
     /**

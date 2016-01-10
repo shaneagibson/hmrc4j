@@ -2,8 +2,8 @@ package uk.co.epsilontechnologies.hmrc4j.api.individualincome.v1_0;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.request.GetRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import uk.co.epsilontechnologies.hmrc4j.api.individualincome.v1_0.model.AnnualIncomeSummary;
@@ -22,6 +22,8 @@ import uk.co.epsilontechnologies.hmrc4j.core.oauth20.aop.UserRestricted;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.String.format;
 
 public class IndividualIncomeAPI extends API {
 
@@ -42,20 +44,23 @@ public class IndividualIncomeAPI extends API {
     @UserRestricted(scope = Scope.READ_INDIVIDUAL_INCOME)
     public AnnualIncomeSummary fetchAnnualIncomeSummary(final UTR saUtr, final TaxYear taxYear) throws InvalidUTRException, InvalidTaxYearException {
         try {
-            final HttpResponse<JsonNode> jsonResponse = Unirest
-                    .get(url(String.format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue())))
-                    .header("Authorization", String.format("Bearer %s", userToken().orElse("")))
-                    .header("Accept", acceptHeader("json")).asJson();
-            switch (jsonResponse.getStatus()) {
-                case 200 : return toAnnualIncomeSummary(jsonResponse.getBody().getObject());
-                case 400 : {
-                    if (isInvalidUtr(jsonResponse)) throw handleInvalidUtr(jsonResponse);
-                    if (isInvalidTaxYear(jsonResponse)) throw handleInvalidTaxYear(jsonResponse);
-                }
-                default : throw handleUnexpectedResponse(jsonResponse);
-            }
+            final GetRequest request = get(format("/sa/%s/annual-summary/%s", saUtr.getValue(), taxYear.getValue()));
+            addHeader(request, "Accept", formatAcceptHeader("json"));
+            addHeader(request, "Authorization", String.format("Bearer %s", userToken().orElse("")));
+            return handleResponse(request.asJson());
         } catch (final UnirestException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private AnnualIncomeSummary handleResponse(final HttpResponse<JsonNode> jsonResponse) throws InvalidUTRException, InvalidTaxYearException{
+        switch (jsonResponse.getStatus()) {
+            case 200 : return toAnnualIncomeSummary(jsonResponse.getBody().getObject());
+            case 400 : {
+                if (isInvalidUtr(jsonResponse)) throw handleInvalidUtr(jsonResponse);
+                if (isInvalidTaxYear(jsonResponse)) throw handleInvalidTaxYear(jsonResponse);
+            }
+            default : throw handleUnexpectedResponse(jsonResponse);
         }
     }
 

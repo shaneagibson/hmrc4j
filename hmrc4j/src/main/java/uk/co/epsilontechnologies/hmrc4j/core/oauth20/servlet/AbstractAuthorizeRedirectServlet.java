@@ -7,7 +7,6 @@ import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidStateException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.RedirectUriMismatchException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.UserDeniedAuthorizationException;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.TokenStore;
-import uk.co.epsilontechnologies.hmrc4j.core.oauth20.endpoint.TokenEndpoint;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

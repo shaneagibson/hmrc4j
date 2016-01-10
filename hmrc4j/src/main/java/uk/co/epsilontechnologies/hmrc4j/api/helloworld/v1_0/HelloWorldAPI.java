@@ -2,8 +2,8 @@ package uk.co.epsilontechnologies.hmrc4j.api.helloworld.v1_0;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.request.GetRequest;
 import uk.co.epsilontechnologies.hmrc4j.core.API;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcContext;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
@@ -46,11 +46,10 @@ public class HelloWorldAPI extends API {
 
     private String sayHello(final String path, final Optional<String> bearerToken) {
         try {
-            final HttpResponse<JsonNode> jsonResponse = Unirest
-                    .get(url(path))
-                    .header("Accept", acceptHeader("json"))
-                    .header("Authorization", String.format("Bearer %s", bearerToken.orElse("")))
-                    .asJson();
+            final GetRequest request = get(path);
+            addHeader(request, "Accept", formatAcceptHeader("json"));
+            addHeader(request, "Authorization", String.format("Bearer %s", bearerToken.orElse("")));
+            final HttpResponse<JsonNode> jsonResponse = request.asJson();
             switch (jsonResponse.getStatus()) {
                 case 200 : return jsonResponse.getBody().getObject().getString("message");
                 default : throw handleUnexpectedResponse(jsonResponse);

@@ -9,7 +9,7 @@ This library is provides a java-wrapper for HMRC's growing collection of APIs. F
 - Integration with HMRC's key OAuth 2.0 operations (Authorize, Token, and Revoke endpoints)
 - Automatic refreshing of expired OAuth 2.0 tokens prior to use (using AspectJ)
 - Encapsulation of HMRC's OAuth 2.0 token via a simple [TokenStore](https://github.com/shaneagibson/hmrc4j/blob/master/hmrc4j/src/main/java/uk/co/epsilontechnologies/hmrc4j/core/oauth20/TokenStore.java) interface
-- Extensible architecture, so you can provide your own bespoke API implementations and still receive these same benefits
+- Extensible architecture, so you can provide your own bespoke client implementations and still receive these same benefits
 
 ## Installation
 

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import uk.co.epsilontechnologies.hmrc4j.api.helloworld.v1_0.HelloWorldAPI;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcFactory;
