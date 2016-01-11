@@ -9,7 +9,7 @@ This library is provides a java-wrapper for HMRC's growing collection of APIs. F
 - Integration with HMRC's key OAuth 2.0 operations (Authorize, Token, and Revoke endpoints)
 - Automatic refreshing of expired OAuth 2.0 tokens prior to use (using AspectJ)
 - Encapsulation of HMRC's OAuth 2.0 token via a simple [TokenStore](https://github.com/shaneagibson/hmrc4j/blob/master/hmrc4j/src/main/java/uk/co/epsilontechnologies/hmrc4j/core/oauth20/TokenStore.java) interface
-- Extensible architecture, so you can provide your own bespoke client implementations and still receive these same benefits
+- An extensible architecture, so you can provide your own bespoke client implementations and still receive these same benefits
 
 ## Installation
 
@@ -64,9 +64,14 @@ An application-restricted endpoint uses your application's `server_token`, which
 
 ### Accessing a User-restricted Endpoint
 
-A user-restricted endpoint requires an OAuth 2.0 `access_token`. To get one, you need your user (taxpayer, organisation or agent) to authorize your application. This is done by opening a web browser and requesting the following URL:
+A user-restricted endpoint requires an OAuth 2.0 `access_token`. To get one, you need your user (individual, organisation or agent) to authorize your application. This is done by opening a web browser and requesting the following URL:
 
-`https://api.service.hmrc.gov.uk/oauth/authorize?response_type=code&client_id=[YOUR-CLIENT-ID]&scope=[REQUESTED-SCOPE]&state=[STATE]&redirect_uri=[YOUR-REDIRECT-URI]`
+    https://api.service.hmrc.gov.uk/oauth/authorize
+        ?response_type=code
+        &client_id=[YOUR-CLIENT-ID]
+        &scope=[REQUESTED-SCOPE]
+        &state=[STATE]
+        &redirect_uri=[YOUR-REDIRECT-URI]
 
 You user will be first prompted to log in to HMRC using their Government Gateway credentials, and then asked to authorize your application for the requested permissions.
 
@@ -94,7 +99,7 @@ To run a sample application, clone the repository, change directory to the desir
 
     > mvn spring-boot:run
     
-Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample).
+Once the application has started, open [http://localhost:8080/hmrc4j/sample](http://localhost:8080/hmrc4j/sample) in a browser.
 
 NOTE: you will need to create a file under `/hmrc/hmrc-samples/[sample-project]/src/main/resources/config` called `secure.properties`, and add the following values:
 
