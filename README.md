@@ -66,12 +66,11 @@ An application-restricted endpoint uses your application's `server_token`, which
 
 A user-restricted endpoint requires an OAuth 2.0 `access_token`. To get one, you need your user (individual, organisation or agent) to authorize your application. This is done by opening a web browser and requesting the following URL:
 
-    https://api.service.hmrc.gov.uk/oauth/authorize
-        ?response_type=code
-        &client_id=[YOUR-CLIENT-ID]
-        &scope=[REQUESTED-SCOPE]
-        &state=[STATE]
-        &redirect_uri=[YOUR-REDIRECT-URI]
+    https://api.service.hmrc.gov.uk/oauth/authorize?response_type=code
+                &client_id=[YOUR-CLIENT-ID]
+                &scope=[REQUESTED-SCOPE]
+                &state=[STATE]
+                &redirect_uri=[YOUR-REDIRECT-URI]
 
 You user will be first prompted to log in to HMRC using their Government Gateway credentials, and then asked to authorize your application for the requested permissions.
 
