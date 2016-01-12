@@ -8,19 +8,38 @@ import java.util.regex.Pattern;
 
 import static uk.co.epsilontechnologies.hmrc4j.core.util.Require.require;
 
+/**
+ * A domain-specific wrapper for a Tax Year.
+ */
 public class TaxYear {
 
+    /**
+     * The value of the Tax Year.
+     */
     private final String value;
 
+    /**
+     * Default Constructor
+     * @param value the raw value as a String, in "CCYY-YY" format
+     */
     public TaxYear(final String value) {
         require(isValid(value), "TaxYear is not valid");
         this.value = value;
     }
 
+    /**
+     * Retrieves the value as a String
+     * @return the value as a String
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Validates the given Tax Year value
+     * @param value the raw value as a String
+     * @return true if the value is valid, false otherwise.
+     */
     public static boolean isValid(final String value) {
         if (value == null) return false;
         if (!Pattern.compile("(\\b19|\\b20)\\d\\d-\\d\\d").matcher(value).matches()) return false;

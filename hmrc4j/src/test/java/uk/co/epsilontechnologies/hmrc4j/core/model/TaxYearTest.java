@@ -11,6 +11,11 @@ public class TaxYearTest {
     }
 
     @Test
+    public void shouldRejectNullValue() {
+        Assert.assertFalse(TaxYear.isValid(null));
+    }
+
+    @Test
     public void shouldRejectValueWithMissingYears() {
         Assert.assertFalse(TaxYear.isValid("2013-15"));
     }

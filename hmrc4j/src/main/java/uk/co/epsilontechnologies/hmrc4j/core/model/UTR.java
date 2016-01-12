@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.regex.Pattern;
+
 import static uk.co.epsilontechnologies.hmrc4j.core.util.Require.require;
 
 public class UTR {
@@ -20,7 +22,9 @@ public class UTR {
     }
 
     public static boolean isValid(final String value) {
-        return true; // TODO
+        if (value == null) return false;
+        if (!Pattern.compile("[0-9]{10}").matcher(value).matches()) return false;
+        return true;
     }
 
     @Override
