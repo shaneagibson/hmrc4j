@@ -19,10 +19,10 @@ You can integrate the latest version of hmrc4j into your Maven project by includ
        <dependency>
            <groupId>uk.co.epsilontechnologies</groupId>
            <artifactId>hmrc4j</artifactId>
-           <version>1.0.0</version>
+           <version>1.0.6</version>
        </dependency>
 
-If your maven repository is not configured to proxy [Bintray](https://bintray.com/), you may have to add the following configuration to your project's pom.xml:
+NOTE: This artefact isn't yet published to Maven Central, so you may have to add the following configuration to your project's pom.xml:
 
        <repositories>
          <repository>
