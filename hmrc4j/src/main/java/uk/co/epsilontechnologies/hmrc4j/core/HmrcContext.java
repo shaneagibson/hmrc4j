@@ -23,37 +23,72 @@ public class HmrcContext {
      */
     private final Optional<HmrcCredentials> credentials;
 
+    private final String baseUrl;
+
     /**
      * Instantiate a HMRC Context with empty Token Manager and Credentials.
+     *
+     * @param baseUrl the Base URL for the HMRC API Gateway
      */
-    HmrcContext() {
-        this.tokenManager = Optional.empty();
-        this.credentials = Optional.empty();
+    HmrcContext(final String baseUrl) {
+        this(baseUrl, Optional.empty(), Optional.empty());
     }
 
     /**
      * Instantiate a HMRC Context with the given Credentials and an empty Token Manager.
      *
+     * @param baseUrl the Base URL for the HMRC API Gateway
      * @param credentials the HMRC Client Application Credentials
      */
-    HmrcContext(final HmrcCredentials credentials) {
-        this.tokenManager = Optional.empty();
-        this.credentials = Optional.of(credentials);
+    HmrcContext(
+            final String baseUrl,
+            final HmrcCredentials credentials) {
+        this(baseUrl, Optional.of(credentials), Optional.empty());
     }
 
     /**
      * Instantiate a HMRC Context with the given Credentials and Token Manager.
      *
+     * @param baseUrl the Base URL for the HMRC API Gateway
      * @param credentials the HMRC Client Application Credentials
      * @param tokenStore the Token Store for persisting this user's OAuth 2.0 token
      */
-    HmrcContext(final HmrcCredentials credentials, final TokenStore tokenStore) {
-        this.tokenManager = Optional.of(new TokenManager(
-                new AuthorizeEndpoint(credentials),
-                new TokenEndpoint(credentials),
-                new RevokeEndpoint(credentials),
-                tokenStore));
-        this.credentials = Optional.of(credentials);
+    HmrcContext(
+            final String baseUrl,
+            final HmrcCredentials credentials,
+            final TokenStore tokenStore) {
+        this(
+                baseUrl,
+                Optional.of(credentials),
+                Optional.of(new TokenManager(
+                    new AuthorizeEndpoint(baseUrl, credentials),
+                    new TokenEndpoint(baseUrl, credentials),
+                    new RevokeEndpoint(baseUrl, credentials),
+                    tokenStore)));
+    }
+
+    /**
+     * Private Constructor.
+     *
+     * @param baseUrl the Base URL for the HMRC API Gateway
+     * @param credentials the HMRC Client Application Credentials
+     * @param tokenManager the Token Manager for accessing and maintaining tokens
+     */
+    private HmrcContext(
+            final String baseUrl,
+            final Optional<HmrcCredentials> credentials,
+            final Optional<TokenManager> tokenManager) {
+        this.baseUrl = baseUrl;
+        this.tokenManager = tokenManager;
+        this.credentials = credentials;
+    }
+
+    /**
+     * Fetches the base url for the HMRC APIs.
+     * @return the base url
+     */
+    public String getBaseUrl() {
+        return this.baseUrl;
     }
 
     /**

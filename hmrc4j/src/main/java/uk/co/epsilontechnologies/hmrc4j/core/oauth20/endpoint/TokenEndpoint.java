@@ -18,11 +18,11 @@ public class TokenEndpoint {
 
     private static final Log LOG = LogFactory.getLog(TokenEndpoint.class);
 
-    private static final String TOKEN_URL = API.BASE_URL + "/oauth/token";
-
+    private final String baseUrl;
     private final HmrcCredentials credentials;
 
-    public TokenEndpoint(final HmrcCredentials credentials) {
+    public TokenEndpoint(final String baseUrl, final HmrcCredentials credentials) {
+        this.baseUrl = baseUrl;
         this.credentials = credentials;
     }
 
@@ -36,7 +36,7 @@ public class TokenEndpoint {
 
     private Token requestToken(final String grantType, final String key, final String value, final String redirectUri) {
         try {
-            final HttpResponse<JsonNode> jsonResponse = Unirest.post(TOKEN_URL)
+            final HttpResponse<JsonNode> jsonResponse = Unirest.post(baseUrl + "/oauth/token")
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .header("Accept", "application/json")
                     .field("grant_type", grantType)

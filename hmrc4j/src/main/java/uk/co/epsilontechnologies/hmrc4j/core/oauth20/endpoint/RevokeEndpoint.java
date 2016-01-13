@@ -11,13 +11,13 @@ import uk.co.epsilontechnologies.hmrc4j.core.HmrcCredentials;
 
 public class RevokeEndpoint {
 
-    private static final String REVOKE_URL = API.BASE_URL + "/oauth/revoke";
-
     private static final Log LOG = LogFactory.getLog(RevokeEndpoint.class);
 
+    private final String baseUrl;
     private final HmrcCredentials credentials;
 
-    public RevokeEndpoint(final HmrcCredentials credentials) {
+    public RevokeEndpoint(final String baseUrl, final HmrcCredentials credentials) {
+        this.baseUrl = baseUrl;
         this.credentials = credentials;
     }
 
@@ -27,7 +27,7 @@ public class RevokeEndpoint {
             return; // TODO - REVOKE endpoint is not yet implemented by HMRC
         }
         try {
-            final HttpResponse<JsonNode> jsonResponse = Unirest.post(REVOKE_URL)
+            final HttpResponse<JsonNode> jsonResponse = Unirest.post(baseUrl + "/oauth/revoke")
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .header("Accept", "application/json")
                     .field("client_id", this.credentials.getClientId())

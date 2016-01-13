@@ -16,28 +16,32 @@ public class HmrcImpl implements Hmrc {
 
     /**
      * Create a HMRC instance to be used for Unrestricted endpoints only.
+     *
+     * @param baseUrl the Base URL for the HMRC API Gateway
      */
-    public HmrcImpl() {
-        this.hmrcContext = new HmrcContext();
+    public HmrcImpl(final String baseUrl) {
+        this.hmrcContext = new HmrcContext(baseUrl);
     }
 
     /**
      * Create a HMRC instance to be used for Unrestricted or Application-restricted endpoints only.
      *
+     * @param baseUrl the Base URL for the HMRC API Gateway
      * @param hmrcCredentials the application's credentials, containing {@code client_id}, {@code client_secret} and {@code server_token}
      */
-    public HmrcImpl(final HmrcCredentials hmrcCredentials) {
-        this.hmrcContext = new HmrcContext(hmrcCredentials);
+    public HmrcImpl(final String baseUrl, final HmrcCredentials hmrcCredentials) {
+        this.hmrcContext = new HmrcContext(baseUrl, hmrcCredentials);
     }
 
     /**
      * Create a HMRC instance to be used for Unrestricted, Application-restricted or User-restricted endpoints.
      *
+     * @param baseUrl the Base URL for the HMRC API Gateway
      * @param hmrcCredentials the application's credentials, containing {@code client_id}, {@code client_secret} and {@code server_token}
      * @param tokenStore the store for the user's OAuth 2.0 token
      */
-    public HmrcImpl(final HmrcCredentials hmrcCredentials, final TokenStore tokenStore) {
-        this.hmrcContext = new HmrcContext(hmrcCredentials, tokenStore);
+    public HmrcImpl(final String baseUrl, final HmrcCredentials hmrcCredentials, final TokenStore tokenStore) {
+        this.hmrcContext = new HmrcContext(baseUrl, hmrcCredentials, tokenStore);
     }
 
     /**

@@ -11,18 +11,18 @@ import java.util.Optional;
 
 public class AuthorizeEndpoint {
 
-    private static final String AUTHORIZE_URL = API.BASE_URL + "/oauth/authorize";
-
+    private final String baseUrl;
     private final HmrcCredentials credentials;
 
-    public AuthorizeEndpoint(final HmrcCredentials credentials) {
+    public AuthorizeEndpoint(final String baseUrl, final HmrcCredentials credentials) {
+        this.baseUrl = baseUrl;
         this.credentials = credentials;
     }
 
     public URL getURL(final String redirectUri, final List<Scope> scope, final Optional<String> state) {
         try {
             final StringBuilder url = new StringBuilder();
-            url.append(AUTHORIZE_URL);
+            url.append(baseUrl + "/oauth/authorize");
             url.append("?response_type=").append("code");
             url.append("&client_id=").append(credentials.getClientId());
             url.append("&scope=").append(Scope.asString(scope));

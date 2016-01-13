@@ -8,11 +8,16 @@ import uk.co.epsilontechnologies.hmrc4j.core.oauth20.TokenStore;
 public class HmrcFactory {
 
     /**
+     * The base URL for HMRC's API Gateway.
+     */
+    public static final String BASE_URL = "https://api.service.hmrc.gov.uk";
+
+    /**
      * Creates a HMRC object for unrestricted access. This can only be used to access unrestricted endpoints.
      * @return a HMRC object with unrestricted access
      */
     public static Hmrc createForUnrestrictedAccess() {
-        return new HmrcImpl();
+        return new HmrcImpl(BASE_URL);
     }
 
     /**
@@ -21,7 +26,7 @@ public class HmrcFactory {
      * @return a HMRC object with application-restricted and unrestricted access
      */
     public static Hmrc createForApplicationRestrictedAccess(final HmrcCredentials credentials) {
-        return new HmrcImpl(credentials);
+        return new HmrcImpl(BASE_URL, credentials);
     }
 
     /**
@@ -31,7 +36,7 @@ public class HmrcFactory {
      * @return a HMRC object with user-restricted, application-restricted and unrestricted access
      */
     public static Hmrc createForUserRestrictedAccess(final HmrcCredentials credentials, final TokenStore tokenStore) {
-        return new HmrcImpl(credentials, tokenStore);
+        return new HmrcImpl(BASE_URL, credentials, tokenStore);
     }
 
 }

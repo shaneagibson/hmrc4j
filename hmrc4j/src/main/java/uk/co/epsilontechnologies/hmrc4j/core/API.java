@@ -18,11 +18,6 @@ import java.util.Optional;
 public abstract class API {
 
     /**
-     * The base URL for HMRC's API Gateway.
-     */
-    public static final String BASE_URL = "https://api.service.hmrc.gov.uk";
-
-    /**
      * The Context for the API invocation.
      * The maintains any credentials or token information that might be required by any API invocations.
      */
@@ -79,7 +74,7 @@ public abstract class API {
      * @return the full url
      */
     protected String formatUrl(final String path) {
-        return String.format("%s/%s%s", BASE_URL, context(), path);
+        return String.format("%s/%s%s", hmrcContext.getBaseUrl(), context(), path);
     }
 
     /**
