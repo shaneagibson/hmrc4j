@@ -1,9 +1,6 @@
 package uk.co.epsilontechnologies.hmrc4j.api.helloworld.v1_0;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import uk.co.epsilontechnologies.hmrc4j.core.Hmrc;
 import uk.co.epsilontechnologies.hmrc4j.core.HmrcImpl;
 import uk.co.epsilontechnologies.primer.Primable;
@@ -13,6 +10,7 @@ import static uk.co.epsilontechnologies.primer.PrimerStatics.*;
 import static uk.co.epsilontechnologies.primer.domain.RequestBuilder.*;
 import static uk.co.epsilontechnologies.primer.domain.SimpleResponseBuilder.response;
 
+@Ignore
 public class HelloWorldRedirectTest {
 
     @Primable(contextPath = "/hello", port = 9000)
