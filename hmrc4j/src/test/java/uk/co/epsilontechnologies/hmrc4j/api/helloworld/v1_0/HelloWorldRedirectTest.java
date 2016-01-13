@@ -21,12 +21,12 @@ public class HelloWorldRedirectTest {
     @Before
     public void setUp() {
         initPrimers(this);
-        hmrcServer.start();
+        this.hmrcServer.start();
     }
 
     @After
     public void tearDown() {
-        hmrcServer.stop();
+        this.hmrcServer.stop();
     }
 
     @Test
@@ -41,8 +41,8 @@ public class HelloWorldRedirectTest {
 
     private void shouldRespectRedirect(final int redirectHttpStatusCode) {
 
-        when(hmrcServer.receives(get().withUri("/world"))).thenReturn(response(redirectHttpStatusCode).withHeader("Location", "http://localhost:9000/hello/new"));
-        when(hmrcServer.receives(get().withUri("/new"))).thenReturn(response(200).withBody("{ \"message\" : \"Hello via Redirect\" }"));
+        when(this.hmrcServer.receives(get().withUri("/world"))).thenReturn(response(redirectHttpStatusCode).withHeader("Location", "http://localhost:9000/hello/new"));
+        when(this.hmrcServer.receives(get().withUri("/new"))).thenReturn(response(200).withBody("{ \"message\" : \"Hello via Redirect\" }"));
 
         final Hmrc hmrc = new HmrcImpl("http://localhost:9000");
 
