@@ -19,11 +19,34 @@ public class Token {
      */
     private static final long EXPIRY_SKEW_IN_SECONDS = 10;
 
+    /**
+     * The OAuth 2.0 Access Token
+     */
     private final String accessToken;
+
+    /**
+     * The OAuth 2.0 Refresh Token
+     */
     private final String refreshToken;
+
+    /**
+     * The period of time (in seconds) in which the token will expire
+     */
     private final int expiresIn;
+
+    /**
+     * The type of token (currently this is always "Bearer")
+     */
     private final String tokenType;
+
+    /**
+     * The scope of the token
+     */
     private final List<Scope> scope;
+
+    /**
+     * The timestamp at which the token was created
+     */
     private final Instant createdAt;
 
     public Token(

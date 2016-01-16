@@ -14,26 +14,64 @@ import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Token;
 
 import java.time.Instant;
 
+/**
+ * A wrapper for the HMRC OAuth 2.0 Token Endpoint.
+ */
 public class TokenEndpoint {
 
+    /**
+     * The Logger for this class
+     */
     private static final Log LOG = LogFactory.getLog(TokenEndpoint.class);
 
+    /**
+     * The Base URL for the HMRC API Gateway (and OAuth 2.0 Service).
+     */
     private final String baseUrl;
+
+    /**
+     * The HMRC Credentials for the client.
+     */
     private final HmrcCredentials credentials;
 
+    /**
+     * Default Constructor
+     * @param baseUrl the Base URL for the HMRC API Gateway (and OAuth 2.0 Service).
+     * @param credentials the HMRC Credentials for the client.
+     */
     public TokenEndpoint(final String baseUrl, final HmrcCredentials credentials) {
         this.baseUrl = baseUrl;
         this.credentials = credentials;
     }
 
+    /**
+     * Refreshes the Authority for the given Refresh Token.
+     * @param refreshToken the refresh token for the authority being refreshed
+     * @param redirectUri the redirect URI for which the authority was originally requested
+     * @return the new token
+     */
     public Token refresh(final String refreshToken, final String redirectUri) {
         return requestToken("refresh_token", "refresh_token", refreshToken, redirectUri);
     }
 
+    /**
+     * Exchanges the given Authorization Code for an OAuth 2.0 token
+     * @param authorizationCode the authorization code to exchange
+     * @param redirectUri the redirect URI for which the authority was originally requested
+     * @return the token
+     */
     public Token exchange(final String authorizationCode, final String redirectUri) {
         return requestToken("authorization_code", "code", authorizationCode, redirectUri);
     }
 
+    /**
+     * Requests a token for the given grant type
+     * @param grantType the grant type (either "refresh_token" or "authorization_code")
+     * @param key the key for the request (either "refresh_token" or "code")
+     * @param value the value for the request (either the value of the refresh_token or the authorization_code)
+     * @param redirectUri the redirect URI for which the authority was originally requested
+     * @return the token
+     */
     private Token requestToken(final String grantType, final String key, final String value, final String redirectUri) {
         try {
             final HttpResponse<JsonNode> jsonResponse = Unirest.post(baseUrl + "/oauth/token")
@@ -60,6 +98,11 @@ public class TokenEndpoint {
         }
     }
 
+    /**
+     * Converts the given JSONObject into a token
+     * @param json the json to convert
+     * @return the token
+     */
     private Token asToken(final JSONObject json) {
         return new Token(
                 json.getString("access_token"),

@@ -13,9 +13,24 @@ import java.util.Optional;
  */
 public class TokenManager {
 
+    /**
+     * The wrapper for the OAuth 2.0 Authorize Endpoint.
+     */
     private final AuthorizeEndpoint authorizeEndpoint;
+
+    /**
+     * The wrapper for the OAuth 2.0 Token Endpoint.
+     */
     private final TokenEndpoint tokenEndpoint;
+
+    /**
+     * The wrapper for the OAuth 2.0 Revoke Endpoint.
+     */
     private final RevokeEndpoint revokeEndpoint;
+
+    /**
+     * The client's token store implementation for maintaining tokens.
+     */
     private final TokenStore tokenStore;
 
     /**
