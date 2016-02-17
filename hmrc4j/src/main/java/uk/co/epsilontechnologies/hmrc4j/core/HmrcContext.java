@@ -23,6 +23,9 @@ public class HmrcContext {
      */
     private final Optional<HmrcCredentials> credentials;
 
+    /**
+     * The base URL for the HMRC API Gateway.
+     */
     private final String baseUrl;
 
     /**

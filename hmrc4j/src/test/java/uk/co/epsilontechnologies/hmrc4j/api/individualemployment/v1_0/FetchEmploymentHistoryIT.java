@@ -15,7 +15,7 @@ import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 public class FetchEmploymentHistoryIT extends AbstractUserRestrictedIT {
 
     @Test
-    public void shouldEmploymentHistory() throws InvalidUTRException, InvalidTaxYearException {
+    public void shouldFetchEmploymentHistory() throws InvalidUTRException, InvalidTaxYearException {
         final UTR saUtr = new UTR("2234567890");
         final TaxYear taxYear = new TaxYear("2014-15");
         final EmploymentHistories result = getAPI(IndividualEmploymentAPI.class).fetchEmploymentHistory(saUtr, taxYear);

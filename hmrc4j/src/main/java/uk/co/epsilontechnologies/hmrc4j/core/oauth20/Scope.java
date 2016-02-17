@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
  */
 public enum Scope {
 
+    // example scope
     SAY_HELLO("hello"),
+
+    // read scopes
     READ_INDIVIDUAL_BENEFITS("read:individual-benefits"),
     READ_INDIVIDUAL_EMPLOYMENT("read:individual-employment"),
     READ_INDIVIDUAL_INCOME("read:individual-income"),

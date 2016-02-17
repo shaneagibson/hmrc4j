@@ -25,7 +25,7 @@ public class AuthorizeEndpoint {
 
     /**
      * Default Constructor
-     * @param baseUrl the Base URL for the HMRC API Gateway (and OAuth 2.0 Serivce).
+     * @param baseUrl the Base URL for the HMRC API Gateway (and OAuth 2.0 Service).
      * @param credentials the HMRC credentials for the client.
      */
     public AuthorizeEndpoint(final String baseUrl, final HmrcCredentials credentials) {
@@ -43,7 +43,7 @@ public class AuthorizeEndpoint {
     public URL getURL(final String redirectUri, final List<Scope> scope, final Optional<String> state) {
         try {
             final StringBuilder url = new StringBuilder();
-            url.append(baseUrl + "/oauth/authorize");
+            url.append(baseUrl).append("/oauth/authorize");
             url.append("?response_type=").append("code");
             url.append("&client_id=").append(credentials.getClientId());
             url.append("&scope=").append(Scope.asString(scope));
