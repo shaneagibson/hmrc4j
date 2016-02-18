@@ -19,7 +19,7 @@ You can integrate the latest version of hmrc4j into your Maven project by includ
        <dependency>
            <groupId>uk.co.epsilontechnologies</groupId>
            <artifactId>hmrc4j</artifactId>
-           <version>1.0.13</version>
+           <version>1.0.16</version>
        </dependency>
 
 ## Usage
