@@ -5,7 +5,7 @@
 
     <groupId>uk.co.epsilontechnologies</groupId>
     <artifactId>hmrc4j</artifactId>
-    <version>1.0.15</version>
+    <version>1.0.16-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>hmrc4j</name>
     <description>A Java Library for the HMRC APIs</description>
@@ -23,7 +23,7 @@
         <connection>scm:git:git@github.com:shaneagibson/hmrc4j.git</connection>
         <developerConnection>scm:git:git@github.com:shaneagibson/hmrc4j.git</developerConnection>
         <url>git@github.com:shaneagibson/hmrc4j.git</url>
-        <tag>hmrc4j-1.0.15</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>
