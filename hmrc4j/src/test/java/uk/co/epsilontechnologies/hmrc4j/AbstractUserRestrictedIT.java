@@ -23,6 +23,8 @@ import java.util.UUID;
 
 public abstract class AbstractUserRestrictedIT extends AbstractIT {
 
+    protected static final int PORT = Integer.parseInt(getConfig("server.port"));
+
     protected abstract Scope getScope();
 
     private boolean initialized = false;
@@ -35,12 +37,11 @@ public abstract class AbstractUserRestrictedIT extends AbstractIT {
     }
 
     public AbstractUserRestrictedIT(final TokenStore tokenStore) {
-        final int port = Integer.parseInt(getConfig("server.port"));
-        this.server = new Server(port);
+        this.server = new Server(PORT);
         this.server.setHandler(new ServerRequestHandler());
         this.tokenStore = tokenStore;
         this.tokenStore.setState(UUID.randomUUID().toString());
-        this.tokenStore.setRedirectUri(String.format("http://localhost:%s/redirect", port));
+        this.tokenStore.setRedirectUri(String.format("http://localhost:%s/redirect", PORT));
     }
 
     @Override
