@@ -85,7 +85,9 @@ public abstract class AbstractUserRestrictedIT extends AbstractIT {
         browser.findElement(By.id("password")).sendKeys("password1");
         browser.findElement(By.tagName("button")).click();
         browser.findElement(By.id("authorise")).click();
-        while (!initialized) { /* wait til initialized */ }
+        while (!initialized) {
+            Thread.sleep(100);
+        }
     }
 
     class ServerRequestHandler extends AbstractHandler {
