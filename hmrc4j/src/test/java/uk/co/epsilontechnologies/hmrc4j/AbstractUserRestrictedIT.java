@@ -23,17 +23,23 @@ import java.util.UUID;
 
 public abstract class AbstractUserRestrictedIT extends AbstractIT {
 
-    private static final int PORT = Integer.parseInt(getConfig("server.port"));
+    protected static final int PORT = Integer.parseInt(getConfig("server.port"));
 
     protected abstract Scope getScope();
+
+    private boolean initialized = false;
 
     protected final Server server;
     protected final TokenStore tokenStore;
 
     public AbstractUserRestrictedIT() {
+        this(new InMemoryTokenStore());
+    }
+
+    public AbstractUserRestrictedIT(final TokenStore tokenStore) {
         this.server = new Server(PORT);
         this.server.setHandler(new ServerRequestHandler());
-        this.tokenStore = new InMemoryTokenStore();
+        this.tokenStore = tokenStore;
         this.tokenStore.setState(UUID.randomUUID().toString());
         this.tokenStore.setRedirectUri(String.format("http://localhost:%s/redirect", PORT));
     }
@@ -79,6 +85,7 @@ public abstract class AbstractUserRestrictedIT extends AbstractIT {
         browser.findElement(By.id("password")).sendKeys("password1");
         browser.findElement(By.tagName("button")).click();
         browser.findElement(By.id("authorise")).click();
+        while (!initialized) { /* wait til initialized */ }
     }
 
     class ServerRequestHandler extends AbstractHandler {
@@ -113,11 +120,12 @@ public abstract class AbstractUserRestrictedIT extends AbstractIT {
                 case "/success" : httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 case "/failure" : httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
+            initialized = true;
         }
 
     }
 
-    class InMemoryTokenStore implements TokenStore {
+    public static class InMemoryTokenStore implements TokenStore {
 
         private Optional<Token> token = Optional.empty();
         private Optional<String> redirectUri = Optional.empty();

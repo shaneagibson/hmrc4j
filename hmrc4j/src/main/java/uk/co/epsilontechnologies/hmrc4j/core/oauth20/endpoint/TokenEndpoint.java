@@ -13,6 +13,7 @@ import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Token;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 /**
  * A wrapper for the HMRC OAuth 2.0 Token Endpoint.
@@ -109,7 +110,7 @@ public class TokenEndpoint {
                 json.getString("refresh_token"),
                 json.getInt("expires_in"),
                 json.getString("token_type"),
-                Scope.asList(json.has("scope") ? json.getString("scope") : ""), // NOTE - scope is not provided when refreshing
+                json.has("scope") ? Scope.asList(json.getString("scope")) : new ArrayList<>(), // NOTE - scope is not provided when refreshing
                 Instant.now());
     }
 

@@ -50,7 +50,7 @@ public class AuthorizeEndpoint {
             url.append("&redirect_uri=").append(redirectUri);
             if (state.isPresent()) url.append("&state=").append(state.get());
             return new URL(url.toString());
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }

@@ -32,6 +32,18 @@ public abstract class API {
     }
 
     /**
+     * Declares the version for this API.
+     * @return the version of the API
+     */
+    protected abstract String version();
+
+    /**
+     * Declares the context for this API.
+     * @return the context of the API
+     */
+    protected abstract String context();
+
+    /**
      * Retrieves the context for any API invocation.
      * @return the context of the API
      */
@@ -108,18 +120,6 @@ public abstract class API {
     protected void addHeader(final HttpRequest request, final String key, final String value) {
         request.header(key, value);
     }
-
-    /**
-     * Declares the version for this API.
-     * @return the version of the API
-     */
-    protected abstract String version();
-
-    /**
-     * Declares the context for this API.
-     * @return the context of the API
-     */
-    protected abstract String context();
 
     /**
      * Determines if the given API HTTP Response matches the given error code.
