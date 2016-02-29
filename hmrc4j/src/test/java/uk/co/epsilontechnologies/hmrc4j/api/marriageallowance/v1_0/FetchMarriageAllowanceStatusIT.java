@@ -1,6 +1,7 @@
 package uk.co.epsilontechnologies.hmrc4j.api.marriageallowance.v1_0;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import uk.co.epsilontechnologies.hmrc4j.AbstractUserRestrictedIT;
 import uk.co.epsilontechnologies.hmrc4j.api.individualtax.v1_0.IndividualTaxAPI;
@@ -12,6 +13,7 @@ import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidTaxYearException
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidUTRException;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Scope;
 
+@Ignore // TODO - ignored until HMRC add API Subscription for my Client ID
 public class FetchMarriageAllowanceStatusIT extends AbstractUserRestrictedIT {
 
     @Test

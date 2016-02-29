@@ -1,6 +1,7 @@
 package uk.co.epsilontechnologies.hmrc4j.api.marriageallowance.v1_0;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import uk.co.epsilontechnologies.hmrc4j.AbstractUserRestrictedIT;
 import uk.co.epsilontechnologies.hmrc4j.api.marriageallowance.v1_0.model.MarriageAllowanceStatus;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Ignore // TODO - ignored until HMRC add API Subscription for my Client ID
 public class CheckMarriageAllowanceEligibilityIT extends AbstractUserRestrictedIT {
 
     @Test
