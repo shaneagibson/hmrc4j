@@ -1,5 +1,6 @@
 package uk.co.epsilontechnologies.hmrc4j.sample.controller;
 
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +68,7 @@ public class SampleController {
 
     @RequestMapping(value = "/sample/hello/user")
     public String sayHelloUser(final Model model) {
+        LogFactory.getLog(SampleController.class).debug("Invoking hello user");
         final String message = HmrcFactory.createForUserRestrictedAccess(hmrcCredentials, tokenStore).getAPI(HelloWorldAPI.class).sayHelloUser();
         model.addAttribute("message", message);
         return render(model);

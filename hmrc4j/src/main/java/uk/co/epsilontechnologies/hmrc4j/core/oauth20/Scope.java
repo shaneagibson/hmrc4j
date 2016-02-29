@@ -17,7 +17,8 @@ public enum Scope {
     READ_INDIVIDUAL_EMPLOYMENT("read:individual-employment"),
     READ_INDIVIDUAL_INCOME("read:individual-income"),
     READ_INDIVIDUAL_TAX("read:individual-tax"),
-    READ_NATIONAL_INSURANCE("read:national-insurance");
+    READ_NATIONAL_INSURANCE("read:national-insurance"),
+    READ_MARRIAGE_ALLOWANCE("read:marriage-allowance");
 
     /**
      * The key for the scope.

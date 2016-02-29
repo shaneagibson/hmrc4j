@@ -6,10 +6,13 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.HttpRequest;
 import org.json.JSONObject;
+import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidNINOException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidTaxYearException;
 import uk.co.epsilontechnologies.hmrc4j.core.model.error.InvalidUTRException;
 import uk.co.epsilontechnologies.hmrc4j.core.oauth20.Token;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -134,6 +137,16 @@ public abstract class API {
     }
 
     /**
+     * Determines if the HTTP Response contains an invalid NINO error response.
+     *
+     * @param jsonResponse the HTTP response to check
+     * @return true if the HTTP response contains an Invalid NINO error.
+     */
+    protected boolean isInvalidNino(final HttpResponse<JsonNode> jsonResponse) {
+        return matchError("NINO_INVALID", jsonResponse);
+    }
+
+    /**
      * Determines if the HTTP Response contains an invalid UTR error response.
      *
      * @param jsonResponse the HTTP response to check
@@ -169,6 +182,24 @@ public abstract class API {
      */
     protected InvalidUTRException handleInvalidUtr(final HttpResponse<JsonNode> jsonResponse) {
         return new InvalidUTRException(jsonResponse.getBody().getObject().getString("message"));
+    }
+
+    /**
+     * Handles an Tnvalid NINO error by convering the HTTP response into an InvalidNINOException.
+     * @param jsonResponse the invalid HTTP response
+     * @return the invalid NINO exception
+     */
+    protected InvalidNINOException handleInvalidNino(final HttpResponse<JsonNode> jsonResponse) {
+        return new InvalidNINOException(jsonResponse.getBody().getObject().getString("message"));
+    }
+
+    /**
+     * Formats the given date into a string (using 'yyyy-MM-dd' format).
+     * @param date the date to format
+     * @return the date as a string, in format 'yyyy-MM-dd
+     */
+    protected String formatDate(final Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
 
 }
